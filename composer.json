@@ -1,0 +1,21 @@
+{
+    "name": "artooha/universal-bot",
+    "description": "A package for creating unified bots that can share common logic for any of the most popular messengers.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artur Semyonov",
+            "email": "semenovartur@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Artooha\\UniversalBot": "src/"
+        }
+    }
+}

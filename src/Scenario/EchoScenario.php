@@ -9,15 +9,18 @@ use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 class EchoScenario implements ScenarioInterface
 {
     protected $bot;
+    protected $params = [];
 
     /**
      * EchoScenario constructor.
      *
      * @param UniversalBotInterface $bot
+     * @param array                 $params Additional params you may want to pass to scenario
      */
-    public function __construct(UniversalBotInterface $bot)
+    public function __construct(UniversalBotInterface $bot, array $params = [])
     {
         $this->bot = $bot;
+        $this->params = $params;
     }
 
     /**

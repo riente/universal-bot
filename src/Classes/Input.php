@@ -66,7 +66,7 @@ class Input
             $property = lcfirst($property);
 
             if (property_exists($this, $property)) {
-                if ($matches[0] == 'g') {
+                if ($matches[1] == 'g') {
                     return $this->$property;
                 } elseif (count($arguments) > 0) {
                     $this->$property = $arguments[0];

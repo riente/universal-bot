@@ -28,9 +28,9 @@ class TelegramBot implements UniversalBotInterface
         $result = new Input();
         $data = json_decode($input);
 
-        $result->setUserId($data->from->id);
-        $result->setChatId($data->chat->id);
-        $result->setBody($data->text);
+        $result->setUserId($data->message->from->id);
+        $result->setChatId($data->message->chat->id);
+        $result->setBody($data->message->text);
 
         return $result;
     }

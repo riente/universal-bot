@@ -85,7 +85,7 @@ class SkypeBot implements UniversalBotInterface
             // No headers, so we avoid double encoding and thus errors
         );
 
-        $data = json_decode($response->response, true);
+        $data = json_decode($response->body, true);
 
         if (!isset($data['access_token'])) {
             $error = $data['error_description'] ?? $data['error'] ?? json_encode($data);

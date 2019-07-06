@@ -9,12 +9,16 @@ namespace Artooha\UniversalBot\Classes;
  *
  * @method mixed getUserId()
  * @method mixed setUserId($userId)
+ * @method mixed getUserName()
+ * @method mixed setUserName($userName)
  * @method mixed getChatId()
  * @method mixed setChatId($chatId)
  * @method mixed getBody()
  * @method mixed setBody($body)
  * @method mixed getType()
  * @method mixed setType($type)
+ * @method mixed getMessageId()
+ * @method mixed setMessageId($id)
  * @method mixed setHasAudios($value)
  * @method mixed setHasFiles($value)
  * @method mixed setHasImages($value)
@@ -46,7 +50,13 @@ class Input
      */
     protected $chatId;
 
+    /**
+     * @var string $userName Some messengers provide a user name with messages.
+     */
+    protected $userName;
+
     protected $type;
+    protected $messageId;
     protected $body;
 
     protected $hasAudios = false;

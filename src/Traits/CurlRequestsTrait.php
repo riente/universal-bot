@@ -38,7 +38,7 @@ trait CurlRequestsTrait
 
         $response = new \stdClass();
         $response->code = $info['http_code'];
-        $response->response = $result;
+        $response->body = $result;
 
         return $response;
     }
@@ -69,7 +69,7 @@ trait CurlRequestsTrait
 
         $response = new \stdClass();
         $response->code = $info['http_code'];
-        $response->response = $result;
+        $response->body = $result;
 
         return $response;
     }

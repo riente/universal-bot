@@ -7,6 +7,7 @@ use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\ConfigTrait;
 use Artooha\UniversalBot\Traits\CurlRequestsTrait;
+use Exception;
 
 class VkBot implements UniversalBotInterface
 {
@@ -27,6 +28,8 @@ class VkBot implements UniversalBotInterface
         $result->setUserId($data->object->from_id);
         $result->setChatId($data->object->peer_id);
         $result->setBody($data->object->text);
+        $result->setMessageId($data->object->id ?? $data->object->conversation_message_id ?? 0); // May be improved
+        $result->setUserName('VK user #'.$data->object->from_id); // We can get it from a separate API call
 
         // TODO: check secret, test reply and forward messages
 
@@ -37,6 +40,7 @@ class VkBot implements UniversalBotInterface
      * @param string $text
      * @param array  $params
      * @return string
+     * @throws Exception
      * @link https://vk.com/dev/messages.send
      */
     public function sendMessage(string $text, array $params = []) : string
@@ -44,7 +48,7 @@ class VkBot implements UniversalBotInterface
         // random_id is a required parameter
         $randomId = $params['messageId'] ?? str_replace(' ', '', microtime());
 
-        $result = $this->sendGetRequest(self::API_ENDPOINT.'messages.send', [
+        $request = $this->sendGetRequest(self::API_ENDPOINT.'messages.send', [
             'peer_id' => $this->peerId,
             'random_id' => $randomId,
             'message' => $text,
@@ -54,9 +58,12 @@ class VkBot implements UniversalBotInterface
             'v' => self::API_VERSION,
         ]);
 
-        $result = json_decode($result->response);
+        $data = json_decode($request->body);
+        if (empty($data)) {
+            throw new Exception('Empty or incorrect response.');
+        }
 
-        return $result->response;
+        return (string) $data->response;
     }
 
     public function sendKeyboard()

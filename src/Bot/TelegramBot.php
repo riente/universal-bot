@@ -31,6 +31,10 @@ class TelegramBot implements UniversalBotInterface
         $result->setUserId($data->message->from->id);
         $result->setChatId($data->message->chat->id);
         $result->setBody($data->message->text);
+        $result->setMessageId($data->message->message_id);
+        $result->setUserName(
+            $data->message->from->first_name ?? $data->message->from->username ?? 'Unknown'
+        );
 
         return $result;
     }
@@ -40,6 +44,7 @@ class TelegramBot implements UniversalBotInterface
      * @param string $text
      * @param array  $params Additional params for message (like parse_mode, reply_to_message_id, etc.)
      * @return \stdClass
+     * @throws \Exception
      */
     public function sendMessage(string $text, array $params = []) : string
     {
@@ -53,7 +58,14 @@ class TelegramBot implements UniversalBotInterface
             'disable_web_page_preview' => $params['disable_web_page_preview'] ?? true,
         ];
 
-        return $this->sendPostRequest($url, $params);
+        $response = $this->sendPostRequest($url, $params);
+        $data = json_decode($response->body);
+
+        if (empty($data)) {
+            throw new \Exception('Empty or incorrect response.');
+        }
+
+        return (string) $data->result->message_id;
     }
 
     public function sendKeyboard()

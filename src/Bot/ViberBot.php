@@ -26,6 +26,11 @@ class ViberBot implements UniversalBotInterface
 
         $data = json_decode($input);
 
+        $result->setUserId($data->sender->id);
+        $result->setChatId($data->sender->id);
+        $result->setMessageId($data->message_token);
+        $result->setUserName($data->sender->name ?? 'Unknown');
+
         $type = $data->message->type;
         switch ($type) {
             case 'sticker':
@@ -67,7 +72,7 @@ class ViberBot implements UniversalBotInterface
             'text' => $text,
         ]);
 
-        return $result->message_token;
+        return (string) $result->message_token;
     }
 
     public function sendKeyboard()
@@ -112,7 +117,7 @@ class ViberBot implements UniversalBotInterface
             throw new Exception("Non-successful HTTP response code: {$result->code}\n{$result->response}");
         }
 
-        $data = json_decode($result->response);
+        $data = json_decode($result->body);
         if ($data->status > 0) {
             throw new Exception($data->status_message, $data->status);
         }

@@ -2,7 +2,7 @@
 
 namespace Artooha\UniversalBot\Bot;
 
-use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\CacheTrait;
@@ -20,7 +20,7 @@ class WhatsAppBot implements UniversalBotInterface
 
     private $token;
 
-    public function parseInput(string $input): Input
+    public function parseInput(string $input): InputContainer
     {
         // TODO: Implement parseInput() method.
     }
@@ -64,6 +64,13 @@ class WhatsAppBot implements UniversalBotInterface
     {
         /*
          * All generated tokens expire in 7 days.
+         * The response will look like the following example:
+         * {
+         *      "users": [{
+         *          "token": "eyJhbGciOHlXVCJ9.eyJ1c2VyIjoNTIzMDE2Nn0.mEoF0COaO00Z1cANo",
+         *          "expires_after": "2018-03-01 15:29:26+00:00"
+         *      }]
+         * }
          */
 
         $result = new \stdClass();

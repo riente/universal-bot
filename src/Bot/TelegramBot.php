@@ -3,6 +3,7 @@
 namespace Artooha\UniversalBot\Bot;
 
 use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\ConfigTrait;
@@ -23,7 +24,7 @@ class TelegramBot implements UniversalBotInterface
      * @return Input
      * @link https://core.telegram.org/bots/api#update
      */
-    public function parseInput(string $input): Input
+    public function parseInput(string $input): InputContainer
     {
         $result = new Input();
         $data = json_decode($input);
@@ -36,7 +37,10 @@ class TelegramBot implements UniversalBotInterface
             $data->message->from->first_name ?? $data->message->from->username ?? 'Unknown'
         );
 
-        return $result;
+        $container = new InputContainer();
+        $container->addInputObject($result);
+
+        return $container;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Artooha\UniversalBot\Interfaces;
 
-use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 
 interface UniversalBotInterface
 {
@@ -20,7 +20,7 @@ interface UniversalBotInterface
     public function __construct(CacheDriverInterface $cacheDriver = null);
 
     public function setConfig(array $config = []);
-    public function parseInput(string $input) : Input;
+    public function parseInput(string $input) : InputContainer;
 
     /**
      * @param string $text

@@ -2,7 +2,7 @@
 
 namespace Artooha\UniversalBot\Bot;
 
-use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\CacheTrait;
@@ -21,11 +21,11 @@ class SkypeBot implements UniversalBotInterface
 
     private $token;
 
-    public function parseInput(string $input): Input
+    public function parseInput(string $input): InputContainer
     {
         // TODO: Implement parseInput() method.
 
-        return new Input();
+        return new InputContainer();
     }
 
     /**

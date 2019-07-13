@@ -3,6 +3,7 @@
 namespace Artooha\UniversalBot\Bot;
 
 use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\ConfigTrait;
@@ -20,7 +21,7 @@ class VkBot implements UniversalBotInterface
     protected $userId;
     protected $token;
 
-    public function parseInput(string $input) : Input
+    public function parseInput(string $input) : InputContainer
     {
         $result = new Input();
         $data = json_decode($input);
@@ -33,7 +34,10 @@ class VkBot implements UniversalBotInterface
 
         // TODO: check secret, test reply and forward messages
 
-        return $result;
+        $container = new InputContainer();
+        $container->addInputObject($result);
+
+        return $container;
     }
 
     /**

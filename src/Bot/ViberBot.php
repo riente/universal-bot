@@ -3,6 +3,7 @@
 namespace Artooha\UniversalBot\Bot;
 
 use Artooha\UniversalBot\Classes\Input;
+use Artooha\UniversalBot\Classes\InputContainer;
 use Artooha\UniversalBot\Interfaces\UniversalBotInterface;
 use Artooha\UniversalBot\Traits\BotConstructorTrait;
 use Artooha\UniversalBot\Traits\ConfigTrait;
@@ -20,7 +21,7 @@ class ViberBot implements UniversalBotInterface
     protected $userId;
     protected $token;
 
-    public function parseInput(string $input): Input
+    public function parseInput(string $input): InputContainer
     {
         $result = new Input();
 
@@ -51,7 +52,10 @@ class ViberBot implements UniversalBotInterface
                 break;
         }
 
-        return $result;
+        $container = new InputContainer();
+        $container->addInputObject($result);
+
+        return $container;
     }
 
     /**

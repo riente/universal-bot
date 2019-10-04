@@ -25,7 +25,7 @@ trait CurlRequestsTrait
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         } else {
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         }
 
         if (!empty($headers)) {

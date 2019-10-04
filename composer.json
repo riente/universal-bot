@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Artooha\\UniversalBot": "src/"
+            "Artooha\\UniversalBot\\": "src/"
         }
     }
 }

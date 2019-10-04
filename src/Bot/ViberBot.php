@@ -73,6 +73,7 @@ class ViberBot implements UniversalBotInterface
                 'name' => $this->botName,
                 //'avatar' => '',
             ],
+            'type' => 'text',
             'text' => $text,
         ]);
 

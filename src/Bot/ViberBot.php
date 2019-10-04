@@ -113,8 +113,8 @@ class ViberBot implements UniversalBotInterface
     protected function standardViberRequest($url, array $data = [])
     {
         $result = $this->sendPostRequest($url, $data, [
-            'Content-Type' => 'application/json',
-            'X-Viber-Auth-Token' => $this->token,
+            'Content-Type: application/json',
+            'X-Viber-Auth-Token: '.$this->token,
         ]);
 
         if ($result->code != 200) {

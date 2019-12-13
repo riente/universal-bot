@@ -31,7 +31,7 @@ class TelegramBot implements UniversalBotInterface
 
         $result->setUserId($data->message->from->id);
         $result->setChatId($data->message->chat->id);
-        $result->setBody($data->message->text);
+        $result->setBody($data->message->text ?? '');
         $result->setMessageId($data->message->message_id);
         $result->setUserName(
             $data->message->from->first_name ?? $data->message->from->username ?? 'Unknown'
